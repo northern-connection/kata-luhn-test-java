@@ -18,7 +18,8 @@ public class LuhnTestTest {
     @Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                { "00000000000", true }
+                { "00000000000", true },
+                { "00000000001", false }
            });
     }
 
