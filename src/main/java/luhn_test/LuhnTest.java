@@ -5,7 +5,8 @@ public class LuhnTest {
         String reversedDigits = new StringBuilder(digits).reverse().toString();
 
         int firstDigit = Integer.parseInt(reversedDigits.substring(0, 1));
+        int thirdDigit = Integer.parseInt(reversedDigits.substring(2, 3));
 
-        return firstDigit % 10 == 0;
+        return (firstDigit + thirdDigit) % 10 == 0;
     }
 }
