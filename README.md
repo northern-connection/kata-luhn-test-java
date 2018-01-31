@@ -31,3 +31,18 @@ If s1 + s2 ends in zero then the original number is in the form of a valid credi
 > 4. Finally compute s1 + s2 = 70
 > If the result ends in zero, it means that the digits pass the Luhn test
 > In the case of 49927398716 the result is 70 so it passes the Lunh test.
+
+
+Examples:
+
+000 0000 0000 > true
+
+000 0000 0001 > 100 0000 0000 > false
+
+000 0000 0901 > true
+000 0001 0901 > false
+
+000 0000 2040 > true 
+
+000 0000 1090 > true 
+
