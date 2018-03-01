@@ -8,7 +8,8 @@ public class LuhnTest {
         String reversedDigits = reverseDigits(digits);
         List<Integer> numbers = getNumbers(reversedDigits);
         List<Integer> odds = filterOdds(numbers);
-        int acum = sum(odds) + numbers.get(1)*2 + numbers.get(3)*2;
+        List<Integer> evens = filterEvens(numbers);
+        int acum = sum(odds) + evens.get(0)*2 + evens.get(1)*2;
 
         return acum % 10 == 0;
     }
@@ -34,6 +35,17 @@ public class LuhnTest {
             }
         }
         return odds;
+    }
+
+    private static List<Integer> filterEvens(List<Integer> numbers) {
+        List<Integer> evens = new ArrayList<>();
+        for (int i = 0; i < numbers.size() ; i++) {
+            int pos = i + 1;
+            if (pos % 2 == 0) {
+                evens.add(numbers.get(i));
+            }
+        }
+        return evens;
     }
 
     private static List<Integer> getNumbers(String digits) {
