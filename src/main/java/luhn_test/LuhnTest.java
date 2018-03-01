@@ -10,10 +10,19 @@ public class LuhnTest {
         List<Integer> odds = filterOdds(numbers);
         List<Integer> evens = filterEvens(numbers);
         List<Integer> evensByTwo = multiplyByTwo(evens);
+        List<Integer> reducedEvens = reduceNumbers(evensByTwo);
 
-        int acum = sum(odds) + reduceNumber(evensByTwo.get(0))  + reduceNumber(evensByTwo.get(1));
+        int acum = sum(odds) + reducedEvens.get(0) + reducedEvens.get(1);
 
         return acum % 10 == 0;
+    }
+
+    private static List<Integer> reduceNumbers(List<Integer> numbers) {
+        List<Integer> reduced = new ArrayList<>();
+        for (int i = 0; i < numbers.size() ; i++) {
+            reduced.add(reduceNumber(numbers.get(i)));
+        }
+        return reduced;
     }
 
     private static int reduceNumber(int number) {
