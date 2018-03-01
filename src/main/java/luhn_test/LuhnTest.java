@@ -11,9 +11,13 @@ public class LuhnTest {
         List<Integer> evens = filterEvens(numbers);
         List<Integer> evensByTwo = multiplyByTwo(evens);
 
-        int acum = sum(odds) + evensByTwo.get(0) + evensByTwo.get(1);
+        int acum = sum(odds) + reduceNumber(evensByTwo.get(0))  + reduceNumber(evensByTwo.get(1));
 
         return acum % 10 == 0;
+    }
+
+    private static int reduceNumber(int number) {
+        return number % 10 + number / 10;
     }
 
     private static List<Integer> multiplyByTwo(List<Integer> evens) {

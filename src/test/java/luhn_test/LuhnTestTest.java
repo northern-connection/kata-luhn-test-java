@@ -24,6 +24,7 @@ public class LuhnTestTest {
                 { "00000010901", false },
                 { "00000000040", false },
                 { "00000001040", true },
+                { "00000006080", true },
            });
     }
 
