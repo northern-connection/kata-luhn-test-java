@@ -8,7 +8,7 @@ public class LuhnTest {
         String reversedDigits = reverseDigits(digits);
         List<Integer> numbers = getNumbers(reversedDigits);
         List<Integer> odds = filterOdds(numbers);
-        int acum = sum(odds);
+        int acum = sum(odds) + numbers.get(1);
 
         return acum % 10 == 0;
     }
