@@ -12,7 +12,7 @@ public class LuhnTest {
         List<Integer> evensByTwo = multiplyByTwo(evens);
         List<Integer> reducedEvens = reduceNumbers(evensByTwo);
 
-        int acum = sum(odds) + reducedEvens.get(0) + reducedEvens.get(1);
+        int acum = sum(odds) + sum(reducedEvens);
 
         return acum % 10 == 0;
     }
