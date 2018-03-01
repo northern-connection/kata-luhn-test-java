@@ -9,9 +9,19 @@ public class LuhnTest {
         List<Integer> numbers = getNumbers(reversedDigits);
         List<Integer> odds = filterOdds(numbers);
         List<Integer> evens = filterEvens(numbers);
-        int acum = sum(odds) + evens.get(0)*2 + evens.get(1)*2;
+        List<Integer> evensByTwo = multiplyByTwo(evens);
+
+        int acum = sum(odds) + evensByTwo.get(0) + evensByTwo.get(1);
 
         return acum % 10 == 0;
+    }
+
+    private static List<Integer> multiplyByTwo(List<Integer> evens) {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < evens.size() ; i++) {
+            numbers.add(evens.get(i) * 2);
+        }
+        return numbers;
     }
 
     private static String reverseDigits(String digits) {
