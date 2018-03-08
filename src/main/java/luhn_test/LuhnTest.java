@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LuhnTest {
     public static boolean isValid(String digits) {
@@ -30,14 +32,11 @@ public class LuhnTest {
     }
 
     private static List<Integer> extractNumbersAtPositions(IntPredicate predicate, List<Integer> numbers) {
-        List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < numbers.size() ; i++) {
-            Integer pos = i + 1;
-            if (predicate.test(pos)) {
-                result.add(numbers.get(i));
-            }
-        }
-        return result;
+        return IntStream.range(0, numbers.size())
+                .map(i -> i+1)
+                .filter(predicate)
+                .mapToObj(i -> numbers.get(i-1))
+                .collect(Collectors.toList());
     }
 
     private static List<Integer> getNumbers(String digits) {
