@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LuhnTest {
     public static boolean isValid(String digits) {
         String reversedDigits = reverseDigits(digits);
         List<Integer> numbers = getNumbers(reversedDigits);
 
-        int oddPositionsContribution = extractNumbersAtPositions((pos) -> pos % 2 != 0, numbers).stream()
+        int oddPositionsContribution = extractNumbersAtPositions((pos) -> pos % 2 != 0, numbers)
                 .reduce(0, Integer::sum);
 
-        int evenPositionsContribution = extractNumbersAtPositions((pos) -> pos % 2 == 0, numbers).stream()
+        int evenPositionsContribution = extractNumbersAtPositions((pos) -> pos % 2 == 0, numbers)
                 .map(n -> n * 2)
                 .map(reduceToOneDigitNumber())
                 .reduce(0, Integer::sum);
@@ -31,12 +31,11 @@ public class LuhnTest {
         return new StringBuilder(digits).reverse().toString();
     }
 
-    private static List<Integer> extractNumbersAtPositions(IntPredicate predicate, List<Integer> numbers) {
+    private static Stream<Integer> extractNumbersAtPositions(IntPredicate predicate, List<Integer> numbers) {
         return IntStream.range(0, numbers.size())
-                .map(i -> i+1)
+                .map(i -> i + 1)
                 .filter(predicate)
-                .mapToObj(i -> numbers.get(i-1))
-                .collect(Collectors.toList());
+                .mapToObj(i -> numbers.get(i - 1));
     }
 
     private static List<Integer> getNumbers(String digits) {
