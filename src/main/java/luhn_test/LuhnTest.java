@@ -2,17 +2,18 @@ package luhn_test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.IntPredicate;
 
 public class LuhnTest {
     public static boolean isValid(String digits) {
         String reversedDigits = reverseDigits(digits);
         List<Integer> numbers = getNumbers(reversedDigits);
-        List<Integer> odds = extractNumbersAtOddPositions(numbers);
-        List<Integer> evens = extractNumbersAtEvenPositions(numbers);
-        List<Integer> evensByTwo = multiplyByTwo(evens);
+        List<Integer> numbersAtOddPositions = extractNumbersAtPositions((pos) -> pos % 2 != 0, numbers);
+        List<Integer> numbersAtEvenPositions = extractNumbersAtPositions((pos) -> pos % 2 == 0, numbers);
+        List<Integer> evensByTwo = multiplyByTwo(numbersAtEvenPositions);
         List<Integer> reducedEvens = reduceNumbers(evensByTwo);
 
-        int acum = sum(odds) + sum(reducedEvens);
+        int acum = sum(numbersAtOddPositions) + sum(reducedEvens);
 
         return acum % 10 == 0;
     }
@@ -49,22 +50,11 @@ public class LuhnTest {
         return acum;
     }
 
-    private static List<Integer> extractNumbersAtOddPositions(List<Integer> numbers) {
+    private static List<Integer> extractNumbersAtPositions(IntPredicate predicate, List<Integer> numbers) {
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < numbers.size() ; i++) {
-            int pos = i + 1;
-            if (pos % 2 != 0) {
-                result.add(numbers.get(i));
-            }
-        }
-        return result;
-    }
-
-    private static List<Integer> extractNumbersAtEvenPositions(List<Integer> numbers) {
-        List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < numbers.size() ; i++) {
-            int pos = i + 1;
-            if (pos % 2 == 0) {
+            Integer pos = i + 1;
+            if (predicate.test(pos)) {
                 result.add(numbers.get(i));
             }
         }
