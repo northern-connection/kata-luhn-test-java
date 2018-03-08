@@ -12,23 +12,15 @@ public class LuhnTest {
         List<Integer> numbersAtOddPositions = extractNumbersAtPositions((pos) -> pos % 2 != 0, numbers);
         List<Integer> numbersAtEvenPositions = extractNumbersAtPositions((pos) -> pos % 2 == 0, numbers);
         List<Integer> numbersAtEvenPositionsByTwo = multiplyByTwo(numbersAtEvenPositions);
-        List<Integer> reducedNumbersAtEvenPositions = reduceNumbers(numbersAtEvenPositionsByTwo);
+        List<Integer> reducedNumbersAtEvenPositions = reduceToOneDigitNumbers(numbersAtEvenPositionsByTwo);
 
         int result = sum(numbersAtOddPositions) + sum(reducedNumbersAtEvenPositions);
 
         return result % 10 == 0;
     }
 
-    private static List<Integer> reduceNumbers(List<Integer> numbers) {
-        List<Integer> reduced = new ArrayList<>();
-        for (Integer number : numbers) {
-            reduced.add(reduceNumber(number));
-        }
-        return reduced;
-    }
-
-    private static int reduceNumber(int number) {
-        return number % 10 + number / 10;
+    private static List<Integer> reduceToOneDigitNumbers(List<Integer> numbers) {
+        return numbers.stream().map(n -> n % 10 + n / 10).collect(Collectors.toList());
     }
 
     private static List<Integer> multiplyByTwo(List<Integer> numbers) {
