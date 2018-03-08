@@ -13,9 +13,9 @@ public class LuhnTest {
         List<Integer> numbersAtEvenPositionsByTwo = multiplyByTwo(numbersAtEvenPositions);
         List<Integer> reducedNumbersAtEvenPositions = reduceNumbers(numbersAtEvenPositionsByTwo);
 
-        int acum = sum(numbersAtOddPositions) + sum(reducedNumbersAtEvenPositions);
+        int result = sum(numbersAtOddPositions) + sum(reducedNumbersAtEvenPositions);
 
-        return acum % 10 == 0;
+        return result % 10 == 0;
     }
 
     private static List<Integer> reduceNumbers(List<Integer> numbers) {
