@@ -2,6 +2,7 @@ package luhn_test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.IntPredicate;
 
 public class LuhnTest {
@@ -14,10 +15,14 @@ public class LuhnTest {
 
         int evenPositionsContribution = extractNumbersAtPositions((pos) -> pos % 2 == 0, numbers).stream()
                 .map(n -> n * 2)
-                .map(n -> n % 10 + n / 10)
+                .map(reduceToOneDigitNumber())
                 .reduce(0, Integer::sum);
 
         return (oddPositionsContribution + evenPositionsContribution) % 10 == 0;
+    }
+
+    private static Function<Integer, Integer> reduceToOneDigitNumber() {
+        return n -> n % 10 + n / 10;
     }
 
     private static String reverseDigits(String digits) {
