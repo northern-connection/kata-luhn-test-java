@@ -20,8 +20,8 @@ public class LuhnTest {
 
     private static List<Integer> reduceNumbers(List<Integer> numbers) {
         List<Integer> reduced = new ArrayList<>();
-        for (int i = 0; i < numbers.size() ; i++) {
-            reduced.add(reduceNumber(numbers.get(i)));
+        for (Integer number : numbers) {
+            reduced.add(reduceNumber(number));
         }
         return reduced;
     }
@@ -32,8 +32,8 @@ public class LuhnTest {
 
     private static List<Integer> multiplyByTwo(List<Integer> evens) {
         List<Integer> numbers = new ArrayList<>();
-        for (int i = 0; i < evens.size() ; i++) {
-            numbers.add(evens.get(i) * 2);
+        for (Integer even : evens) {
+            numbers.add(even * 2);
         }
         return numbers;
     }
