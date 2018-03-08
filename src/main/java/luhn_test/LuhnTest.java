@@ -3,7 +3,6 @@ package luhn_test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.IntPredicate;
-import java.util.stream.Collectors;
 
 public class LuhnTest {
     public static boolean isValid(String digits) {
@@ -11,25 +10,14 @@ public class LuhnTest {
         List<Integer> numbers = getNumbers(reversedDigits);
         List<Integer> numbersAtOddPositions = extractNumbersAtPositions((pos) -> pos % 2 != 0, numbers);
 
-        List<Integer> numbersAtEvenPositions = reduceToOneDigitNumbers(
-                multiplyByTwo(
-                        extractNumbersAtPositions(
-                                (pos) -> pos % 2 == 0, numbers
-                        )
-                )
-        );
+        int evenPositionContribution = extractNumbersAtPositions((pos) -> pos % 2 == 0, numbers).stream()
+                .map(n -> n * 2)
+                .map(n -> n % 10 + n / 10)
+                .reduce(0, Integer::sum);
 
-        int result = sum(numbersAtOddPositions) + sum(numbersAtEvenPositions);
+        int result = sum(numbersAtOddPositions) + evenPositionContribution;
 
         return result % 10 == 0;
-    }
-
-    private static List<Integer> reduceToOneDigitNumbers(List<Integer> numbers) {
-        return numbers.stream().map(n -> n % 10 + n / 10).collect(Collectors.toList());
-    }
-
-    private static List<Integer> multiplyByTwo(List<Integer> numbers) {
-        return numbers.stream().map(n -> n * 2).collect(Collectors.toList());
     }
 
     private static String reverseDigits(String digits) {
