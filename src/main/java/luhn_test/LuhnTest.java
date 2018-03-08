@@ -7,8 +7,8 @@ public class LuhnTest {
     public static boolean isValid(String digits) {
         String reversedDigits = reverseDigits(digits);
         List<Integer> numbers = getNumbers(reversedDigits);
-        List<Integer> odds = filterOdds(numbers);
-        List<Integer> evens = filterEvens(numbers);
+        List<Integer> odds = extractNumbersAtOddPositions(numbers);
+        List<Integer> evens = extractNumbersAtEvenPositions(numbers);
         List<Integer> evensByTwo = multiplyByTwo(evens);
         List<Integer> reducedEvens = reduceNumbers(evensByTwo);
 
@@ -49,26 +49,26 @@ public class LuhnTest {
         return acum;
     }
 
-    private static List<Integer> filterOdds(List<Integer> numbers) {
-        List<Integer> odds = new ArrayList<>();
+    private static List<Integer> extractNumbersAtOddPositions(List<Integer> numbers) {
+        List<Integer> result = new ArrayList<>();
         for (int i = 0; i < numbers.size() ; i++) {
             int pos = i + 1;
             if (pos % 2 != 0) {
-                odds.add(numbers.get(i));
+                result.add(numbers.get(i));
             }
         }
-        return odds;
+        return result;
     }
 
-    private static List<Integer> filterEvens(List<Integer> numbers) {
-        List<Integer> evens = new ArrayList<>();
+    private static List<Integer> extractNumbersAtEvenPositions(List<Integer> numbers) {
+        List<Integer> result = new ArrayList<>();
         for (int i = 0; i < numbers.size() ; i++) {
             int pos = i + 1;
             if (pos % 2 == 0) {
-                evens.add(numbers.get(i));
+                result.add(numbers.get(i));
             }
         }
-        return evens;
+        return result;
     }
 
     private static List<Integer> getNumbers(String digits) {
