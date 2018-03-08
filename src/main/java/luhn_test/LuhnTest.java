@@ -43,11 +43,7 @@ public class LuhnTest {
     }
 
     private static int sum(List<Integer> numbers) {
-        int acum = 0;
-        for (Integer number : numbers) {
-            acum += number;
-        }
-        return acum;
+        return numbers.stream().reduce(0, Integer::sum);
     }
 
     private static List<Integer> extractNumbersAtPositions(IntPredicate predicate, List<Integer> numbers) {
