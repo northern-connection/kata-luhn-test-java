@@ -1,9 +1,12 @@
 package luhn_test;
 
+import java.security.cert.CollectionCertStoreParameters;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -39,11 +42,8 @@ public class LuhnTest {
     }
 
     private static List<Integer> parse(String digits) {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 0; i < digits.length() ; i++) {
-            String digit = digits.substring(i, i + 1);
-            numbers.add(Integer.parseInt(digit));
-        }
-        return numbers;
+        return Arrays.stream(digits.split(""))
+                .mapToInt(s -> Integer.parseInt(s))
+                .boxed().collect(Collectors.toList());
     }
 }
