@@ -10,10 +10,10 @@ public class LuhnTest {
         List<Integer> numbers = getNumbers(reversedDigits);
         List<Integer> numbersAtOddPositions = extractNumbersAtPositions((pos) -> pos % 2 != 0, numbers);
         List<Integer> numbersAtEvenPositions = extractNumbersAtPositions((pos) -> pos % 2 == 0, numbers);
-        List<Integer> evensByTwo = multiplyByTwo(numbersAtEvenPositions);
-        List<Integer> reducedEvens = reduceNumbers(evensByTwo);
+        List<Integer> numbersAtEvenPositionsByTwo = multiplyByTwo(numbersAtEvenPositions);
+        List<Integer> reducedNumbersAtEvenPositions = reduceNumbers(numbersAtEvenPositionsByTwo);
 
-        int acum = sum(numbersAtOddPositions) + sum(reducedEvens);
+        int acum = sum(numbersAtOddPositions) + sum(reducedNumbersAtEvenPositions);
 
         return acum % 10 == 0;
     }
