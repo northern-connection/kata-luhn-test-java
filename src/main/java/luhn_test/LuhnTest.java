@@ -3,6 +3,7 @@ package luhn_test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.IntPredicate;
+import java.util.stream.Collectors;
 
 public class LuhnTest {
     public static boolean isValid(String digits) {
@@ -30,12 +31,8 @@ public class LuhnTest {
         return number % 10 + number / 10;
     }
 
-    private static List<Integer> multiplyByTwo(List<Integer> evens) {
-        List<Integer> numbers = new ArrayList<>();
-        for (Integer even : evens) {
-            numbers.add(even * 2);
-        }
-        return numbers;
+    private static List<Integer> multiplyByTwo(List<Integer> numbers) {
+        return numbers.stream().map(n -> n * 2).collect(Collectors.toList());
     }
 
     private static String reverseDigits(String digits) {
