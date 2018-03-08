@@ -1,7 +1,5 @@
 package luhn_test;
 
-import java.security.cert.CollectionCertStoreParameters;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -43,7 +41,7 @@ public class LuhnTest {
 
     private static List<Integer> parse(String digits) {
         return Arrays.stream(digits.split(""))
-                .mapToInt(s -> Integer.parseInt(s))
+                .mapToInt(Integer::parseInt)
                 .boxed().collect(Collectors.toList());
     }
 }
