@@ -10,11 +10,16 @@ public class LuhnTest {
         String reversedDigits = reverseDigits(digits);
         List<Integer> numbers = getNumbers(reversedDigits);
         List<Integer> numbersAtOddPositions = extractNumbersAtPositions((pos) -> pos % 2 != 0, numbers);
-        List<Integer> numbersAtEvenPositions = extractNumbersAtPositions((pos) -> pos % 2 == 0, numbers);
-        List<Integer> numbersAtEvenPositionsByTwo = multiplyByTwo(numbersAtEvenPositions);
-        List<Integer> reducedNumbersAtEvenPositions = reduceToOneDigitNumbers(numbersAtEvenPositionsByTwo);
 
-        int result = sum(numbersAtOddPositions) + sum(reducedNumbersAtEvenPositions);
+        List<Integer> numbersAtEvenPositions = reduceToOneDigitNumbers(
+                multiplyByTwo(
+                        extractNumbersAtPositions(
+                                (pos) -> pos % 2 == 0, numbers
+                        )
+                )
+        );
+
+        int result = sum(numbersAtOddPositions) + sum(numbersAtEvenPositions);
 
         return result % 10 == 0;
     }
