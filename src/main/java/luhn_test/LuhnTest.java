@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 public class LuhnTest {
     public static boolean isValid(String digits) {
         String reversedDigits = reverseDigits(digits);
-        List<Integer> numbers = getNumbers(reversedDigits);
+        List<Integer> numbers = parse(reversedDigits);
 
         int oddPositionsContribution = extractNumbersAtPositions((pos) -> pos % 2 != 0, numbers)
                 .reduce(0, Integer::sum);
@@ -38,7 +38,7 @@ public class LuhnTest {
                 .mapToObj(i -> numbers.get(i - 1));
     }
 
-    private static List<Integer> getNumbers(String digits) {
+    private static List<Integer> parse(String digits) {
         List<Integer> numbers = new ArrayList<>();
         for (int i = 0; i < digits.length() ; i++) {
             String digit = digits.substring(i, i + 1);
